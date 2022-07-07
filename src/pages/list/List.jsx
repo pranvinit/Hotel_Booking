@@ -48,18 +48,29 @@ export default function List() {
                   <span className="lsOptionText">
                     Min Price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
+                  <input
+                    type="number"
+                    step="10"
+                    min="0"
+                    className="lsOptionInput"
+                  />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
                     Max Price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
+                  <input
+                    type="number"
+                    step="10"
+                    min="0"
+                    className="lsOptionInput"
+                  />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
                   <input
                     type="number"
+                    min="1"
                     className="lsOptionInput"
                     placeholder={options.adult}
                   />
@@ -68,6 +79,7 @@ export default function List() {
                   <span className="lsOptionText">Children</span>
                   <input
                     type="number"
+                    min="0"
                     className="lsOptionInput"
                     placeholder={options.children}
                   />
@@ -76,6 +88,7 @@ export default function List() {
                   <span className="lsOptionText">Room</span>
                   <input
                     type="number"
+                    min="1"
                     className="lsOptionInput"
                     placeholder={options.room}
                   />

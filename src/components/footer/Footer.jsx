@@ -1,8 +1,8 @@
 import "./footer.scss";
 
-export default function Footer() {
+export default function Footer({ type }) {
   return (
-    <div className="footer">
+    <div className={type !== "hotel" ? "footer" : "footer hotel"}>
       <div className="fLists">
         <ul className="fList">
           <li className="fListItem">Countries</li>

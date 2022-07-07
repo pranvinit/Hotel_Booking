@@ -140,7 +140,7 @@ export default function Hotel() {
           </div>
         </div>
         <MailList />
-        <Footer />
+        <Footer type="hotel" />
       </div>
     </div>
   );
