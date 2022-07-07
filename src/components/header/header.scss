@@ -11,6 +11,9 @@
     width: 100%;
     max-width: 1024px;
     margin-block: 20px 100px;
+    &.listMode {
+      margin-bottom: 0;
+    }
 
     .list {
       display: flex;

@@ -1,0 +1,42 @@
+@import "../../partials/variables";
+.fp {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  .fpItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    img {
+      width: 100%;
+    }
+
+    .fpName {
+      font-weight: bold;
+    }
+    .fpCity {
+      font-weight: 300;
+    }
+    .fpPrice {
+      font-weight: 500;
+    }
+
+    .fpRating > button {
+      background-color: $dark-blue;
+      color: $white;
+      font-weight: 500;
+      border: none;
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    .fpRating > span {
+      font-size: 14px;
+    }
+  }
+}

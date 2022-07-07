@@ -1,0 +1,35 @@
+@import "../../partials/variables";
+
+.footer {
+  width: 100%;
+  max-width: 1024px;
+  font-size: 16px;
+  font-weight: 500;
+
+  .fLists {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .fList {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      margin-bottom: 20px;
+
+      .fListItem {
+        margin-bottom: 10px;
+        color: $light-blue;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .fText {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}

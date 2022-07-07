@@ -9,10 +9,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Search from "../search/Search";
 
-export default function Header() {
+export default function Header({ type }) {
   return (
     <div className="header">
-      <div className="container">
+      <div className={type !== "list" ? "container" : "container listMode"}>
         <div className="list">
           <div className="item active">
             <FontAwesomeIcon icon={faBed} />
@@ -35,12 +35,16 @@ export default function Header() {
             <span>Airport taxis</span>
           </div>
         </div>
-        <h1 className="title">Find your next stay</h1>
-        <p className="desc">
-          Search low prices on hotels, homes and much more...
-        </p>
-        <button className="headerBtn">Sign in / Register</button>
-        <Search />
+        {type !== "list" && (
+          <>
+            <h1 className="title">Find your next stay</h1>
+            <p className="desc">
+              Search low prices on hotels, homes and much more...
+            </p>
+            <button className="headerBtn">Sign in / Register</button>
+            <Search />
+          </>
+        )}
       </div>
     </div>
   );

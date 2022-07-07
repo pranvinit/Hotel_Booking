@@ -40,10 +40,12 @@
   }
 
   .date {
+    z-index: 1;
   }
 
   .options {
     position: absolute;
+    z-index: 2;
     top: calc(50px + 4px);
     background-color: $white;
     color: $dark-gray;
