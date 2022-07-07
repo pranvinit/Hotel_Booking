@@ -1,0 +1,104 @@
+@import "../../partials/variables";
+
+.search {
+  width: 100%;
+  max-width: 1024px;
+  height: 50px;
+  background-color: $white;
+  border: 4px solid $yellow;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+
+  .icon {
+    color: $light-gray;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .searchInput {
+    color: $black;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .searchText {
+    color: $dark-gray;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .date {
+  }
+
+  .options {
+    position: absolute;
+    top: calc(50px + 4px);
+    background-color: $white;
+    color: $dark-gray;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    .optionItem {
+      width: 200px;
+      display: flex;
+      justify-content: space-between;
+
+      &:nth-child(2) {
+        margin-block: 10px;
+      }
+
+      .optionsContainer {
+        width: 50%;
+        justify-content: space-between;
+        display: flex;
+        gap: 10px;
+
+        .count {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 14px;
+          font-weight: 500;
+          color: $black;
+        }
+
+        .counter {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border: 1px solid $light-blue;
+          color: $light-blue;
+          background-color: $white;
+          cursor: pointer;
+
+          &:disabled {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+  .searchBtn {
+    background-color: $light-blue;
+    color: $white;
+    font-weight: 500;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+  }
+}

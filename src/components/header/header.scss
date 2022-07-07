@@ -1,0 +1,57 @@
+@import "../../partials/variables";
+
+.header {
+  background-color: $dark-blue;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  .container {
+    width: 100%;
+    max-width: 1024px;
+    margin-block: 20px 100px;
+
+    .list {
+      display: flex;
+      gap: 50px;
+      margin-bottom: 30px;
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 150ms ease-in;
+
+        &:hover,
+        &.active {
+          background-color: #80b5ff66;
+        }
+        &.active {
+          border: 2px solid $light-gray;
+        }
+      }
+    }
+
+    .title {
+      font-size: 3em;
+    }
+
+    .desc {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .headerBtn {
+      background-color: $light-blue;
+      color: $white;
+      font-weight: 500;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+}

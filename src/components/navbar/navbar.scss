@@ -1,0 +1,34 @@
+@import "../../partials/variables";
+
+.navbar {
+  height: 50px;
+  background-color: $dark-blue;
+  display: flex;
+  justify-content: center;
+
+  .container {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $white;
+
+    .logo {
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .items {
+      display: flex;
+      gap: 20px;
+
+      button {
+        border: none;
+        padding: 5px 10px;
+        color: $dark-blue;
+        cursor: pointer;
+      }
+    }
+  }
+}
