@@ -1,5 +1,6 @@
 import "./search.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faPerson } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +12,7 @@ const { beforeToday } = DateRangePicker;
 export default function Search() {
   const [date, setDate] = useState([new Date(), new Date()]);
 
-  console.log(date);
+  const [destination, setDestination] = useState("");
 
   const [showOptions, setShowOptions] = useState(false);
   const [options, setOptions] = useState({
@@ -27,6 +28,12 @@ export default function Search() {
     }));
   };
 
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate("/hotels", { state: { destination, date, options } });
+  };
+
   return (
     <div className="search">
       <div className="item">
@@ -35,6 +42,8 @@ export default function Search() {
           type="text"
           className="searchInput"
           placeholder="Where are you going?"
+          value={destination}
+          onChange={({ target }) => setDestination(target.value)}
         />
       </div>
       <div className="item">
@@ -116,7 +125,9 @@ export default function Search() {
         )}
       </div>
       <div className="item">
-        <button className="searchBtn">Search</button>
+        <button className="searchBtn" onClick={handleSearch}>
+          Search
+        </button>
       </div>
     </div>
   );

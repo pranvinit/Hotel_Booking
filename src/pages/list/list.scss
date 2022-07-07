@@ -1,0 +1,82 @@
+@import "../../partials/variables";
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  .listWrapper {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+
+    .listSearch {
+      flex: 1;
+      background-color: $yellow;
+      padding: 20px;
+      border-radius: 10px;
+      position: sticky;
+      top: 20px;
+      height: max-content;
+
+      .title {
+        color: $dark-gray;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .lsItem {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 10px;
+      }
+
+      .lsItem > label {
+        font-size: 14px;
+      }
+
+      .lsItem > input {
+        height: 30px;
+        border: none;
+        outline: none;
+        padding: 5px;
+      }
+
+      .lsOptions {
+        padding: 10px;
+      }
+
+      .lsOptionItem {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        color: $dark-gray;
+        font-size: 14px;
+
+        .lsOptionInput {
+          width: 50px;
+          border: none;
+          outline: none;
+          padding: 5px;
+        }
+      }
+
+      & > button {
+        padding: 10px;
+        background-color: $light-blue;
+        color: $white;
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+    .listResult {
+      flex: 3;
+    }
+  }
+}
