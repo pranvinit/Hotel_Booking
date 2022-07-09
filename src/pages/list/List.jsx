@@ -28,7 +28,7 @@ export default function List() {
             <h2 className="title">Search</h2>
             <div className="lsItem">
               <label htmlFor="">Destination</label>
-              <input type="text" />
+              <input type="text" placeholder={destination} />
             </div>
             <div className="lsItem">
               <label htmlFor="">Check-in Date</label>

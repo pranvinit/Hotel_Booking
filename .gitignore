@@ -1,7 +1,22 @@
-# Packages
+# packages
 node_modules/
-.env
+*.env
 
-# Media
+# media
 assets/
 
+# bundle
+packages/**/*.d.ts
+packages/**/*.js
+
+# database
+*.sqlite
+
+# misc
+.DS_Store
+lerna-debug.log
+npm-debug.log
+yarn-error.log
+/**/npm-debug.log
+/packages/**/.npmignore
+/packages/**/LICENSE
