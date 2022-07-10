@@ -1,7 +1,17 @@
+### Get all users
+GET http://localhost:5000/api/v1/users
+
+### Get single user
+GET http://localhost:5000/api/v1/users/1
+
+
 ### Update user
-PATCH http://localhost:5000/api/v1/users
+PATCH http://localhost:5000/api/v1/users/2
 Content-Type: application/json
 
 {
-    "name": "updated name"
+    "username": "johnsecretly"
 }
+
+### Delete user
+DELETE http://localhost:5000/api/v1/users/1

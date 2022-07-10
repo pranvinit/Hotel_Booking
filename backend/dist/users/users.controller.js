@@ -14,12 +14,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
-const update_user_dto_1 = require("./dtos/update-user.dto");
+const serialize_interceptor_1 = require("../interceptors/serialize.interceptor");
+const user_dto_1 = require("./dtos/user.dto");
+const users_service_1 = require("./users.service");
 let UsersController = class UsersController {
-    getAllUsers() { }
-    getUser(userId) { }
-    updateUser(userId, body) { }
-    deleteUser(userId) { }
+    constructor(userService) {
+        this.userService = userService;
+    }
+    getAllUsers() {
+        return this.userService.findAllUsers();
+    }
+    getUser(userId) {
+        return this.userService.findUser(userId);
+    }
+    updateUser(userId, body) {
+        return this.userService.updateUser(userId, body);
+    }
+    deleteUser(userId) {
+        return this.userService.deleteUser(userId);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -31,7 +44,7 @@ __decorate([
     (0, common_1.Get)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "getUser", null);
 __decorate([
@@ -39,18 +52,20 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "updateUser", null);
 __decorate([
     (0, common_1.Delete)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "deleteUser", null);
 UsersController = __decorate([
-    (0, common_1.Controller)('users')
+    (0, common_1.Controller)('users'),
+    (0, serialize_interceptor_1.Serialize)(user_dto_1.UserDto),
+    __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map

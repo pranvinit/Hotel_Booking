@@ -1,7 +1,10 @@
-import { UpdateUserDto } from './dtos/update-user.dto';
+import { User } from './entities/user.entity';
+import { UsersService } from './users.service';
 export declare class UsersController {
-    getAllUsers(): void;
-    getUser(userId: string): void;
-    updateUser(userId: string, body: UpdateUserDto): void;
-    deleteUser(userId: string): void;
+    private userService;
+    constructor(userService: UsersService);
+    getAllUsers(): Promise<User[]>;
+    getUser(userId: number): Promise<User>;
+    updateUser(userId: number, body: Partial<User>): Promise<User>;
+    deleteUser(userId: number): Promise<User>;
 }

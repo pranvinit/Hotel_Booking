@@ -21,30 +21,37 @@ let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    register(body) {
-        return this.authService.createUser(body);
+    createUser(response, body) {
+        return this.authService.register(response, body);
     }
-    login(body) { }
-    logout() { }
+    login(response, body) {
+        return this.authService.login(response, body);
+    }
+    logout(response) {
+        return this.authService.logout(response);
+    }
 };
 __decorate([
     (0, common_1.Post)('/register'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [register_user_dto_1.RegisterUserDto]),
+    __metadata("design:paramtypes", [Object, register_user_dto_1.RegisterUserDto]),
     __metadata("design:returntype", void 0)
-], AuthController.prototype, "register", null);
+], AuthController.prototype, "createUser", null);
 __decorate([
     (0, common_1.Post)('/login'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto]),
+    __metadata("design:paramtypes", [Object, login_user_dto_1.LoginUserDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
 __decorate([
     (0, common_1.Get)('/logout'),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "logout", null);
 AuthController = __decorate([

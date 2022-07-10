@@ -11,7 +11,7 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   img: string;
 
   @Column()
@@ -20,6 +20,6 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: false })
-  isAdmin: string;
+  @Column({ default: false, nullable: true })
+  isAdmin: boolean;
 }

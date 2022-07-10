@@ -17,13 +17,45 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../users/entities/user.entity");
 const typeorm_2 = require("typeorm");
+const bcrypt = require("bcrypt");
+const { attachCookieToResponse, createTokenUser, removeCookie, } = require('../utils/jwt');
 let AuthService = class AuthService {
     constructor(repo) {
         this.repo = repo;
     }
-    async createUser(userDto) {
-        const user = await this.repo.create(userDto);
+    async register(response, userDto) {
+        const users = await this.repo.findBy({ email: userDto.email });
+        if (users.length) {
+            throw new common_1.BadRequestException('Email is already in use');
+        }
+        const { password } = userDto;
+        try {
+            const salt = await bcrypt.genSalt();
+            const hash = await bcrypt.hash(password, salt);
+            userDto.password = hash;
+        }
+        catch (err) {
+            throw new common_1.InternalServerErrorException('Something went wrong');
+        }
+        const tokenUser = createTokenUser(userDto);
+        attachCookieToResponse(response, tokenUser);
+        const user = this.repo.create(userDto);
         return this.repo.save(user);
+    }
+    async login(response, { username, password }) {
+        const user = await this.repo.findOneBy({ username });
+        if (!user)
+            throw new common_1.UnauthorizedException('User not found');
+        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        if (!isPasswordCorrect) {
+            throw new common_1.UnauthorizedException('Invalid credentials');
+        }
+        const tokenUser = createTokenUser(user);
+        attachCookieToResponse(response, tokenUser);
+        return tokenUser;
+    }
+    logout(response) {
+        return removeCookie(response);
     }
 };
 AuthService = __decorate([

@@ -3,11 +3,23 @@ POST http://localhost:5000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "username": "Pranav Yeole", 
-    "email": "pranav@gmail.com",
-    "country": "India",
-    "city": "Pune",
-    "phone": "+918530217490",
+    "username": "john", 
+    "email": "john@gmail.com",
+    "country": "Russia",
+    "city": "Moscow",
+    "phone": "5465455454",
     "password": "secret",
     "isAdmin": true
 }
+
+### Login user
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "username": "john",
+    "password": "secret"
+}
+
+### Logout user
+GET http://localhost:5000/api/v1/auth/logout

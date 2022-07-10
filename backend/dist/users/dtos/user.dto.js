@@ -9,40 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-const typeorm_1 = require("typeorm");
-let User = class User {
-};
+exports.UserDto = void 0;
+const class_transformer_1 = require("class-transformer");
+class UserDto {
+}
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], UserDto.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
-], User.prototype, "username", void 0);
+], UserDto.prototype, "username", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], UserDto.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
-], User.prototype, "img", void 0);
+], UserDto.prototype, "img", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
-], User.prototype, "city", void 0);
+], UserDto.prototype, "city", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: false, nullable: true }),
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", Boolean)
-], User.prototype, "isAdmin", void 0);
-User = __decorate([
-    (0, typeorm_1.Entity)()
-], User);
-exports.User = User;
-//# sourceMappingURL=user.entity.js.map
+], UserDto.prototype, "isAdmin", void 0);
+exports.UserDto = UserDto;
+//# sourceMappingURL=user.dto.js.map
