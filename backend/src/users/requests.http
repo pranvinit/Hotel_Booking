@@ -1,0 +1,7 @@
+### Update user
+PATCH http://localhost:5000/api/v1/users
+Content-Type: application/json
+
+{
+    "name": "updated name"
+}

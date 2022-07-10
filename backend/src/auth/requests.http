@@ -1,0 +1,13 @@
+### Create a new user
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "username": "Pranav Yeole", 
+    "email": "pranav@gmail.com",
+    "country": "India",
+    "city": "Pune",
+    "phone": "+918530217490",
+    "password": "secret",
+    "isAdmin": true
+}
