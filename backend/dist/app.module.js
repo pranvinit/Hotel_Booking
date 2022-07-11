@@ -17,6 +17,8 @@ const hotels_module_1 = require("./hotels/hotels.module");
 const auth_module_1 = require("./auth/auth.module");
 const user_entity_1 = require("./users/entities/user.entity");
 const authenticate_user_middleware_1 = require("./middlewares/authenticate-user.middleware");
+const room_entity_1 = require("./rooms/entities/room.entity");
+const hotel_entity_1 = require("./hotels/entities/hotel.entity");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(authenticate_user_middleware_1.CurrentUserMiddleware).forRoutes('*');
@@ -28,7 +30,7 @@ AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'sqlite',
                 database: 'booking.sqlite',
-                entities: [user_entity_1.User],
+                entities: [user_entity_1.User, room_entity_1.Room, hotel_entity_1.Hotel],
                 synchronize: true,
             }),
             users_module_1.UsersModule,

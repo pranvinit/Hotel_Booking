@@ -1,0 +1,16 @@
+### Create a room
+POST http://localhost:5000/api/v1/rooms/3
+Content-Type: application/json
+
+{
+    "title": "room two",
+    "price": 120,
+    "maxPeople": 2,
+    "desc": "Decent room"
+}
+
+### Get all rooms
+GET http://localhost:5000/api/v1/rooms
+
+### Delete Room
+DELETE  http://localhost:5000/api/v1/rooms/3

@@ -1,0 +1,17 @@
+### Create a hotel
+POST http://localhost:5000/api/v1/hotels
+Content-Type: application/json
+
+{
+    "name": "Grand Hotel",
+    "type": "Hotel",
+    "city": "Pune",
+    "address": "somewhere",
+    "distance": "500",
+    "title": "Best hotel in the city",
+    "desc": "hotel description",
+    "cheapestPrice": 200
+}
+
+### Delete a hotel
+DELETE http://localhost:5000/api/v1/hotels/2

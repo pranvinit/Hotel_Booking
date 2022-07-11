@@ -1,5 +1,4 @@
 import { IsString, IsEmail, IsOptional, IsBoolean } from 'class-validator';
-import { Transform } from 'stream';
 
 export class RegisterUserDto {
   @IsString()
