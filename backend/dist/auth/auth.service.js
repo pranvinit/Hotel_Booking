@@ -45,7 +45,7 @@ let AuthService = class AuthService {
     async login(response, { username, password }) {
         const user = await this.repo.findOneBy({ username });
         if (!user)
-            throw new common_1.UnauthorizedException('User not found');
+            throw new common_1.NotFoundException('User not found');
         const isPasswordCorrect = await bcrypt.compare(password, user.password);
         if (!isPasswordCorrect) {
             throw new common_1.UnauthorizedException('Invalid credentials');

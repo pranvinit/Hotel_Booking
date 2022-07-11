@@ -2,7 +2,10 @@
 GET http://localhost:5000/api/v1/users
 
 ### Get single user
-GET http://localhost:5000/api/v1/users/1
+GET http://localhost:5000/api/v1/users/2
+
+### Get current user
+GET http://localhost:5000/api/v1/users/currentUser
 
 
 ### Update user

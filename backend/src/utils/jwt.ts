@@ -1,3 +1,5 @@
+import { TokenUserDto } from 'src/users/dtos/token-user.dto';
+
 const jwt = require('jsonwebtoken');
 const createTokenUser = (user) => ({
   userId: user.id,
@@ -11,7 +13,10 @@ const createJWT = (payload) => {
 
   return token;
 };
-const verifyJWT = (token) => jwt.verify(token, process.env.JWT_SECRET);
+const verifyJWT = (token: TokenUserDto) => {
+  return jwt.verify(token, process.env.JWT_SECRET);
+};
+
 const attachCookieToResponse = (res, user) => {
   const token = createJWT(user);
 

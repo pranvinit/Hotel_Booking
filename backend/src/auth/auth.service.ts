@@ -3,7 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   UnauthorizedException,
-  Response,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
@@ -46,7 +46,7 @@ export class AuthService {
 
   async login(response: Response, { username, password }: LoginUserDto) {
     const user = await this.repo.findOneBy({ username });
-    if (!user) throw new UnauthorizedException('User not found');
+    if (!user) throw new NotFoundException('User not found');
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {

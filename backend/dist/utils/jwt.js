@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require('jsonwebtoken');
 const createTokenUser = (user) => ({
     userId: user.id,
@@ -9,7 +11,9 @@ const createJWT = (payload) => {
     });
     return token;
 };
-const verifyJWT = (token) => jwt.verify(token, process.env.JWT_SECRET);
+const verifyJWT = (token) => {
+    return jwt.verify(token, process.env.JWT_SECRET);
+};
 const attachCookieToResponse = (res, user) => {
     const token = createJWT(user);
     const duration = 24 * 60 * 60 * 1000;

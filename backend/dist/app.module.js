@@ -16,7 +16,11 @@ const rooms_module_1 = require("./rooms/rooms.module");
 const hotels_module_1 = require("./hotels/hotels.module");
 const auth_module_1 = require("./auth/auth.module");
 const user_entity_1 = require("./users/entities/user.entity");
+const authenticate_user_middleware_1 = require("./middlewares/authenticate-user.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(authenticate_user_middleware_1.CurrentUserMiddleware).forRoutes('*');
+    }
 };
 AppModule = __decorate([
     (0, common_1.Module)({

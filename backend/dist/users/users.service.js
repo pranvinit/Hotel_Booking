@@ -21,8 +21,14 @@ let UsersService = class UsersService {
     constructor(repo) {
         this.repo = repo;
     }
+    async currentUser(id) {
+        const user = await this.repo.findBy({ id });
+        if (!user)
+            throw new common_1.NotFoundException('User not found');
+        return user;
+    }
     async findAllUsers() {
-        const users = await this.repo.find({});
+        const users = await this.repo.find();
         return users;
     }
     async findUser(id) {
