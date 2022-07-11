@@ -12,6 +12,9 @@ packages/**/*.js
 # database
 *.sqlite
 
+# compiled files
+dist/
+
 # misc
 .DS_Store
 lerna-debug.log
