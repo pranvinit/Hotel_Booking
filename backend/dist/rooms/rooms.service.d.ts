@@ -6,8 +6,10 @@ export declare class RoomsService {
     private roomsRepo;
     private hotelsRepo;
     constructor(roomsRepo: Repository<Room>, hotelsRepo: Repository<Hotel>);
+    findRoom(id: number): Promise<Room>;
     findAllRooms(): Promise<Room[]>;
     createRoom(hotelId: number, roomDto: CreateRoomDto): Promise<Room>;
-    updateAvailability(id: number, dates: Date[]): Promise<void>;
-    deleteRoom(id: number): Promise<Room>;
+    updateAvailability(id: number, dates: Date[]): Promise<Room[]>;
+    updateRoom(id: number, roomDto: Partial<Room>): Promise<Room>;
+    deleteRoom(roomId: number, hotelId: number): Promise<Room>;
 }

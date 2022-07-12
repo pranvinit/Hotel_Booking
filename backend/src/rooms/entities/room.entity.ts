@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 
 // export interface RoomNumbers {
+//   id: number;
 //   number: number;
 //   unavailableDates: Date[];
 // }
@@ -28,7 +29,10 @@ export class Room {
   @Column()
   desc: string;
 
-  @Column({ nullable: true })
+  @Column({
+    nullable: true,
+    default: '[{number: undefined, id: undefined, unavailableDates: []}]',
+  })
   roomNumbers: string;
 
   @CreateDateColumn()

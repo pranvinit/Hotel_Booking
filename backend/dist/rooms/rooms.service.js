@@ -23,6 +23,12 @@ let RoomsService = class RoomsService {
         this.roomsRepo = roomsRepo;
         this.hotelsRepo = hotelsRepo;
     }
+    async findRoom(id) {
+        const room = await this.roomsRepo.findOneBy({ id });
+        if (!room)
+            throw new common_1.NotFoundException('Room not found');
+        return room;
+    }
     async findAllRooms() {
         const rooms = await this.roomsRepo.find({});
         return rooms;
@@ -37,7 +43,6 @@ let RoomsService = class RoomsService {
             const rooms = JSON.parse(hotel.rooms);
             rooms.push(savedRoom.id);
             hotel.rooms = JSON.stringify(rooms);
-            console.log(hotel);
             await this.hotelsRepo.save(hotel);
             return savedRoom;
         }
@@ -46,14 +51,27 @@ let RoomsService = class RoomsService {
         }
     }
     async updateAvailability(id, dates) {
-        const room = await this.roomsRepo.findOneBy({ id });
+        const room = await this.roomsRepo.find({});
         if (!room)
             throw new common_1.NotFoundException('Room not found');
+        return this.roomsRepo.save(room);
     }
-    async deleteRoom(id) {
+    async updateRoom(id, roomDto) {
         const room = await this.roomsRepo.findOneBy({ id });
         if (!room)
+            throw new common_1.NotFoundException('room not found');
+        Object.assign(room, roomDto);
+        return this.roomsRepo.save(room);
+    }
+    async deleteRoom(roomId, hotelId) {
+        const room = await this.roomsRepo.findOneBy({ id: roomId });
+        if (!room)
             throw new common_1.NotFoundException('Room not found');
+        const hotel = await this.hotelsRepo.findOneBy({ id: hotelId });
+        const rooms = JSON.parse(hotel.rooms);
+        const newRooms = rooms.filter((room) => room !== roomId);
+        hotel.rooms = JSON.stringify(newRooms);
+        await this.hotelsRepo.save(hotel);
         return this.roomsRepo.remove(room);
     }
 };

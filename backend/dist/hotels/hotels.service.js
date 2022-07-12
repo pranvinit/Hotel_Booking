@@ -15,27 +15,72 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HotelsService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const room_entity_1 = require("../rooms/entities/room.entity");
 const typeorm_2 = require("typeorm");
 const hotel_entity_1 = require("./entities/hotel.entity");
 let HotelsService = class HotelsService {
-    constructor(repo) {
-        this.repo = repo;
+    constructor(hotelsRepo, roomsRepo) {
+        this.hotelsRepo = hotelsRepo;
+        this.roomsRepo = roomsRepo;
     }
-    async createHotel(hotelDto) {
-        const hotel = this.repo.create(hotelDto);
-        return this.repo.save(hotel);
+    async findAllHotels(options) {
+        const { min, max, limit } = options;
+        const featured = options.featured ? 'TRUE' : 'FALSE';
+        const hotels = await this.hotelsRepo
+            .createQueryBuilder()
+            .select('*')
+            .where('cheapestPrice >= :min', { min })
+            .andWhere('cheapestPrice <= :max', { max })
+            .andWhere(`featured IS ${featured}`)
+            .limit(limit)
+            .getRawMany();
+        return hotels;
     }
-    async deleteHotel(id) {
-        const hotel = await this.repo.findOneBy({ id });
+    async findHotel(id) {
+        const hotel = await this.hotelsRepo.findOneBy({ id });
         if (!hotel)
             throw new common_1.NotFoundException('Hotel not found');
-        return this.repo.remove(hotel);
+        return hotel;
+    }
+    async findHotelRooms(id) {
+        const hotel = await this.hotelsRepo.findOneBy({ id });
+        if (!hotel)
+            throw new common_1.NotFoundException('Hotel not found');
+        const rooms = JSON.parse(hotel.rooms);
+        try {
+            const list = await Promise.all(rooms.map((room) => {
+                return this.roomsRepo.findOneBy({ id: room });
+            }));
+            return list;
+        }
+        catch (err) {
+            throw new common_1.InternalServerErrorException('Something went wrong');
+        }
+    }
+    async createHotel(hotelDto) {
+        const hotel = this.hotelsRepo.create(hotelDto);
+        return this.hotelsRepo.save(hotel);
+    }
+    async updateHotel(id, hotelDto) {
+        const hotel = await this.hotelsRepo.findOneBy({ id });
+        if (!hotel)
+            throw new common_1.NotFoundException('Hotel not found');
+        Object.assign(hotel, hotelDto);
+        return this.hotelsRepo.save(hotel);
+    }
+    async deleteHotel(id) {
+        const hotel = await this.hotelsRepo.findOneBy({ id });
+        if (!hotel)
+            throw new common_1.NotFoundException('Hotel not found');
+        return this.hotelsRepo.remove(hotel);
     }
 };
 HotelsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(hotel_entity_1.Hotel)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(room_entity_1.Room)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], HotelsService);
 exports.HotelsService = HotelsService;
 //# sourceMappingURL=hotels.service.js.map

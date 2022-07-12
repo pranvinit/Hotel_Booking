@@ -20,18 +20,35 @@ let RoomsController = class RoomsController {
     constructor(roomsService) {
         this.roomsService = roomsService;
     }
-    createRoom(hotelId, body) {
-        return this.roomsService.createRoom(hotelId, body);
+    getSingleRoom(roomId) {
+        return this.roomsService.findRoom(roomId);
     }
     getAllRooms() {
         return this.roomsService.findAllRooms();
     }
-    updateAvailability(roomId, body) {
+    createRoom(hotelId, body) {
+        return this.roomsService.createRoom(hotelId, body);
     }
-    deleteRoom(roomId) {
-        return this.roomsService.deleteRoom(roomId);
+    updateRoom(roomId, body) {
+        return this.roomsService.updateRoom(roomId, body);
+    }
+    deleteRoom(roomId, hotelId) {
+        return this.roomsService.deleteRoom(roomId, hotelId);
     }
 };
+__decorate([
+    (0, common_1.Get)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], RoomsController.prototype, "getSingleRoom", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], RoomsController.prototype, "getAllRooms", null);
 __decorate([
     (0, common_1.Post)('/:id'),
     __param(0, (0, common_1.Param)('id')),
@@ -41,24 +58,19 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], RoomsController.prototype, "createRoom", null);
 __decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], RoomsController.prototype, "getAllRooms", null);
-__decorate([
-    (0, common_1.Patch)(),
+    (0, common_1.Patch)('/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Array]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", void 0)
-], RoomsController.prototype, "updateAvailability", null);
+], RoomsController.prototype, "updateRoom", null);
 __decorate([
-    (0, common_1.Delete)('/:id'),
+    (0, common_1.Delete)('/:id/:hotelId'),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Param)('hotelId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", void 0)
 ], RoomsController.prototype, "deleteRoom", null);
 RoomsController = __decorate([

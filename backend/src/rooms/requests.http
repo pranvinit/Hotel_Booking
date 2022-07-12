@@ -9,8 +9,19 @@ Content-Type: application/json
     "desc": "Decent room"
 }
 
+### Update room
+PATCH http://localhost:5000/api/v1/rooms/1
+Content-Type: application/json
+
+{
+    "roomNumbers": "[{number: 103, id: 1, unavailableDates: []}, {number: 104, id: 2,unavailableDates: []}]"
+}
+
+### Get single room
+GET http://localhost:5000/api/v1/rooms/4
+
 ### Get all rooms
 GET http://localhost:5000/api/v1/rooms
 
 ### Delete Room
-DELETE  http://localhost:5000/api/v1/rooms/3
+DELETE  http://localhost:5000/api/v1/rooms/2/3

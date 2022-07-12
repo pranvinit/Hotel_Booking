@@ -16,6 +16,12 @@ export class RoomsService {
     @InjectRepository(Hotel) private hotelsRepo: Repository<Hotel>,
   ) {}
 
+  async findRoom(id: number) {
+    const room = await this.roomsRepo.findOneBy({ id });
+    if (!room) throw new NotFoundException('Room not found');
+    return room;
+  }
+
   async findAllRooms() {
     const rooms = await this.roomsRepo.find({});
     return rooms;
@@ -35,7 +41,6 @@ export class RoomsService {
       hotel.rooms = JSON.stringify(rooms);
       //end
 
-      console.log(hotel);
       await this.hotelsRepo.save(hotel);
       return savedRoom;
     } catch (err) {
@@ -44,13 +49,39 @@ export class RoomsService {
   }
 
   async updateAvailability(id: number, dates: Date[]) {
-    const room = await this.roomsRepo.findOneBy({ id });
+    const room = await this.roomsRepo.find({});
     if (!room) throw new NotFoundException('Room not found');
+
+    // array bypass
+    // const roomNumbers = JSON.parse(room.roomNumbers);
+    // roomNumbers.push(...dates);
+    // room.roomNumbers = roomNumbers;
+    // end
+
+    return this.roomsRepo.save(room);
   }
 
-  async deleteRoom(id: number) {
+  async updateRoom(id: number, roomDto: Partial<Room>) {
     const room = await this.roomsRepo.findOneBy({ id });
+    if (!room) throw new NotFoundException('room not found');
+
+    Object.assign(room, roomDto);
+    return this.roomsRepo.save(room);
+  }
+
+  async deleteRoom(roomId: number, hotelId: number) {
+    const room = await this.roomsRepo.findOneBy({ id: roomId });
     if (!room) throw new NotFoundException('Room not found');
+
+    const hotel = await this.hotelsRepo.findOneBy({ id: hotelId });
+
+    // array bypass
+    const rooms = JSON.parse(hotel.rooms);
+    const newRooms = rooms.filter((room: number) => room !== roomId);
+    hotel.rooms = JSON.stringify(newRooms);
+    //end
+    await this.hotelsRepo.save(hotel);
+
     return this.roomsRepo.remove(room);
   }
 }

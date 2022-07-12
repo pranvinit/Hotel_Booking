@@ -13,5 +13,23 @@ Content-Type: application/json
     "cheapestPrice": 200
 }
 
+### Get all hotels
+GET http://localhost:5000/api/v1/hotels?min=100&max=250&limit=5&featured=false
+
+
+### Get single hotel
+GET http://localhost:5000/api/v1/hotels/3
+
+### Get hotel rooms
+GET http://localhost:5000/api/v1/hotels/3/rooms
+
+### Update a hotel
+PATCH http://localhost:5000/api/v1/hotels/3
+Content-Type: application/json
+
+{
+    "name": "Updated hotel name"
+}
+
 ### Delete a hotel
-DELETE http://localhost:5000/api/v1/hotels/2
+DELETE http://localhost:5000/api/v1/hotels/3

@@ -15,18 +15,52 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HotelsController = void 0;
 const common_1 = require("@nestjs/common");
 const create_hotel_dto_1 = require("./dtos/create-hotel.dto");
+const get_hotels_dto_1 = require("./dtos/get-hotels.dto");
 const hotels_service_1 = require("./hotels.service");
 let HotelsController = class HotelsController {
     constructor(hotelsService) {
         this.hotelsService = hotelsService;
     }
+    getAllHotels(options) {
+        return this.hotelsService.findAllHotels(options);
+    }
+    getHotel(hotelId) {
+        return this.hotelsService.findHotel(hotelId);
+    }
+    getHotelRooms(hotelId) {
+        return this.hotelsService.findHotelRooms(hotelId);
+    }
     createHotel(body) {
         return this.hotelsService.createHotel(body);
+    }
+    updateHotel(hotelId, body) {
+        return this.hotelsService.updateHotel(hotelId, body);
     }
     deleteHotel(hotelId) {
         return this.hotelsService.deleteHotel(hotelId);
     }
 };
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [get_hotels_dto_1.GetHotelDto]),
+    __metadata("design:returntype", void 0)
+], HotelsController.prototype, "getAllHotels", null);
+__decorate([
+    (0, common_1.Get)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], HotelsController.prototype, "getHotel", null);
+__decorate([
+    (0, common_1.Get)('/:id/rooms'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], HotelsController.prototype, "getHotelRooms", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
@@ -34,6 +68,14 @@ __decorate([
     __metadata("design:paramtypes", [create_hotel_dto_1.CreateHotelDto]),
     __metadata("design:returntype", void 0)
 ], HotelsController.prototype, "createHotel", null);
+__decorate([
+    (0, common_1.Patch)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", void 0)
+], HotelsController.prototype, "updateHotel", null);
 __decorate([
     (0, common_1.Delete)('/:id'),
     __param(0, (0, common_1.Param)('id')),

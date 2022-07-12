@@ -19,37 +19,14 @@ __decorate([
 ], Room.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Room.prototype, "title", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Room.prototype, "price", void 0);
+], Room.prototype, "number", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
-], Room.prototype, "maxPeople", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Room.prototype, "desc", void 0);
-__decorate([
-    (0, typeorm_1.Column)({
-        nullable: true,
-        default: '[{number: undefined, id: undefined, unavailableDates: []}]',
-    }),
-    __metadata("design:type", String)
-], Room.prototype, "roomNumbers", void 0);
-__decorate([
-    (0, typeorm_1.CreateDateColumn)(),
-    __metadata("design:type", Date)
-], Room.prototype, "createdAt", void 0);
-__decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Date)
-], Room.prototype, "updatedAt", void 0);
+    (0, typeorm_1.Column)({ default: '[]' }),
+    __metadata("design:type", Array)
+], Room.prototype, "unavailableDates", void 0);
 Room = __decorate([
     (0, typeorm_1.Entity)()
 ], Room);
 exports.Room = Room;
-//# sourceMappingURL=room.entity.js.map
+//# sourceMappingURL=room-number.entity.js.map
