@@ -1,48 +1,34 @@
 import "./featuredProperties.scss";
+import useFetch from "../../hooks/useFetch";
+import { IMAGES } from "../../mockData";
 
 export default function FeaturedProperties() {
+  const { data, loading, error, reFetch } = useFetch(
+    "/hotels?featured=true&limit=4"
+  );
+
   return (
     <div className="fp">
-      <div className="fpItem">
-        <img src="/assets/images/1.jpg" alt="" />
-        <span className="fpName">Aparthotel Stare Miasto</span>
-        <span className="fpCity">Madird</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src="/assets/images/2.jpg" alt="" />
-        <span className="fpName">Aparthotel Stare Miasto</span>
-        <span className="fpCity">Madird</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src="/assets/images/3.jpg" alt="" />
-        <span className="fpName">Aparthotel Stare Miasto</span>
-        <span className="fpCity">Madird</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src="/assets/images/4.jpg" alt="" />
-        <span className="fpName">Aparthotel Stare Miasto</span>
-        <span className="fpCity">Madird</span>
-        <span className="fpPrice">Starting from $120</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
+      <>
+        {loading
+          ? "Loading please wait"
+          : data?.map((item, i) => (
+              <div key={item.id} className="fpItem">
+                <img src={IMAGES[i]} alt="" />
+                <span className="fpName">{item.name}</span>
+                <span className="fpCity">{item.city}</span>
+                <span className="fpPrice">
+                  Starting from ${item.cheapestPrice}
+                </span>
+                {item.rating && (
+                  <div className="fpRating">
+                    <button>{item.rating}</button>
+                    <span>Excellent</span>
+                  </div>
+                )}
+              </div>
+            ))}
+      </>
     </div>
   );
 }

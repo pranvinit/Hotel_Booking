@@ -16,7 +16,6 @@ exports.HotelsController = void 0;
 const common_1 = require("@nestjs/common");
 const admin_guard_1 = require("../guards/admin.guard");
 const create_hotel_dto_1 = require("./dtos/create-hotel.dto");
-const get_hotels_dto_1 = require("./dtos/get-hotels.dto");
 const hotels_service_1 = require("./hotels.service");
 let HotelsController = class HotelsController {
     constructor(hotelsService) {
@@ -51,7 +50,7 @@ __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [get_hotels_dto_1.GetHotelDto]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], HotelsController.prototype, "getAllHotels", null);
 __decorate([

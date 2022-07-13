@@ -1,18 +1,17 @@
 import "./searchItem.scss";
+import { Link } from "react-router-dom";
 
-export default function SearchItem() {
+export default function SearchItem({ item }) {
   return (
     <div className="searchItem">
       <div className="siImg">
         <img src="/assets/images/1.jpg" alt="" />
       </div>
       <div className="siDesc">
-        <h2 className="siTitle">Tower Street Apartments</h2>
-        <span className="siDistance">500m from center</span>
+        <h2 className="siTitle">{item.name}</h2>
+        <span className="siDistance">{item.distance}m from center</span>
         <span className="siTaxiOp">Free airport taxi</span>
-        <span className="siSubtitle">
-          Studio Apartment with Air conditioning
-        </span>
+        <span className="siSubtitle">{item.desc}</span>
         <span className="siFeatures">
           Entire studio • 1 bathroomm • 21m² • 1 full bed
         </span>
@@ -22,14 +21,18 @@ export default function SearchItem() {
         </span>
       </div>
       <div className="siDetails">
-        <div className="siRating">
-          <span>Excellent</span>
-          <button>9.1</button>
-        </div>
+        {item.rating && (
+          <div className="siRating">
+            <span>Excellent</span>
+            <button>{item.rating}</button>
+          </div>
+        )}
         <div className="siDetailText">
-          <span className="siPrice">$120</span>
+          <span className="siPrice">${item.cheapestPrice}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
-          <button>See availability</button>
+          <Link to={`/hotels/${item.id}`}>
+            <button>See availability</button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import "./list.scss";
 import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
 
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
@@ -17,6 +18,10 @@ export default function List() {
   const [destination, setDestination] = useState(state.destination);
   const [date, setDate] = useState(state.date);
   const [options, setOptions] = useState(state.options);
+
+  const { data, loading, error, reFetch } = useFetch(
+    `/hotels?city=${destination}`
+  );
 
   return (
     <div className="list">
@@ -98,11 +103,15 @@ export default function List() {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {loading ? (
+              "Loading please wait"
+            ) : (
+              <>
+                {data.map((item) => (
+                  <SearchItem item={item} key={item.id} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

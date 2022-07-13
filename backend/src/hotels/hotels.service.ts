@@ -20,19 +20,27 @@ export class HotelsService {
     @InjectRepository(Hotel) private hotelsRepo: Repository<Hotel>,
   ) {}
 
-  async findAllHotels(options: GetHotelDto) {
-    const { min, max, limit } = options;
+  async findAllHotels(options: Partial<GetHotelDto>) {
+    const min = options.min ? options.min : 1;
+    const max = options.max ? options.max : 999;
 
-    const featured = options.featured ? 'TRUE' : 'FALSE';
-
-    const hotels = await this.hotelsRepo
+    const hotelsQuery = this.hotelsRepo
       .createQueryBuilder()
       .select('*')
       .where('cheapestPrice >= :min', { min })
-      .andWhere('cheapestPrice <= :max', { max })
-      .andWhere(`featured IS ${featured}`)
-      .limit(limit)
-      .getRawMany();
+      .andWhere('cheapestPrice <= :max', { max });
+
+    if (options.city) {
+      hotelsQuery.andWhere('city = :city', { city: options.city });
+    }
+    if (options.featured) {
+      hotelsQuery.andWhere(`featured IS ${options.featured}`);
+    }
+    if (options.limit) {
+      hotelsQuery.limit(options.limit);
+    }
+
+    const hotels = await hotelsQuery.getRawMany();
 
     return hotels;
   }
@@ -108,7 +116,7 @@ export class HotelsService {
 
       const listArr = list.map((item, i) => ({
         ...item,
-        type: types[i],
+        type: types[i] + 's',
       }));
       return listArr;
     } catch (err) {

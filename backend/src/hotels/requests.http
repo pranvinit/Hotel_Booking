@@ -3,18 +3,18 @@ POST http://localhost:5000/api/v1/hotels
 Content-Type: application/json
 
 {
-    "name": "Grand Hotel",
+    "name": "Vivanta Bengaluru",
     "type": "Hotel",
-    "city": "Pune",
-    "address": "somewhere",
-    "distance": "500",
-    "title": "Best hotel in the city",
-    "desc": "hotel description",
+    "city": "Bangalore",
+    "address": "66, Residency Rd",
+    "distance": "400",
+    "title": "5 star hotel in the city",
+    "desc": "Very good hotel",
     "cheapestPrice": 200
 }
 
 ### Get all hotels
-GET http://localhost:5000/api/v1/hotels?min=100&max=250&limit=5&featured=false
+GET http://localhost:5000/api/v1/hotels
 
 
 ### Get single hotel
@@ -24,11 +24,11 @@ GET http://localhost:5000/api/v1/hotels/3
 GET http://localhost:5000/api/v1/hotels/1/rooms
 
 ### Update a hotel
-PATCH http://localhost:5000/api/v1/hotels/3
+PATCH http://localhost:5000/api/v1/hotels/7
 Content-Type: application/json
 
 {
-    "name": "Updated hotel name"
+    "featured": true
 }
 
 ### Delete a hotel

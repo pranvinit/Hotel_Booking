@@ -2,6 +2,7 @@
   "name": "new",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000/api/v1",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
@@ -10,6 +11,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.27.2",
     "date-fns": "^2.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

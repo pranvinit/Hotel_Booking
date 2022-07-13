@@ -20,7 +20,7 @@ export class HotelsController {
   constructor(private hotelsService: HotelsService) {}
 
   @Get()
-  getAllHotels(@Query() options: GetHotelDto) {
+  getAllHotels(@Query() options: Partial<GetHotelDto>) {
     return this.hotelsService.findAllHotels(options);
   }
 

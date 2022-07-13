@@ -1,8 +1,11 @@
-import { IsBoolean, IsNumber } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 import { Transform } from 'class-transformer';
 
 export class GetHotelDto {
+  @IsString()
+  city: string;
+
   @Transform(({ value }) => Number(value))
   @IsNumber()
   limit: number;
@@ -15,9 +18,6 @@ export class GetHotelDto {
   @IsNumber()
   max: number;
 
-  @Transform(({ value }) => {
-    return value === 'true' ? true : false;
-  })
   @IsBoolean()
-  featured: boolean;
+  featured: string;
 }

@@ -26,16 +26,23 @@ let HotelsService = class HotelsService {
         this.hotelsRepo = hotelsRepo;
     }
     async findAllHotels(options) {
-        const { min, max, limit } = options;
-        const featured = options.featured ? 'TRUE' : 'FALSE';
-        const hotels = await this.hotelsRepo
+        const min = options.min ? options.min : 1;
+        const max = options.max ? options.max : 999;
+        const hotelsQuery = this.hotelsRepo
             .createQueryBuilder()
             .select('*')
             .where('cheapestPrice >= :min', { min })
-            .andWhere('cheapestPrice <= :max', { max })
-            .andWhere(`featured IS ${featured}`)
-            .limit(limit)
-            .getRawMany();
+            .andWhere('cheapestPrice <= :max', { max });
+        if (options.city) {
+            hotelsQuery.andWhere('city = :city', { city: options.city });
+        }
+        if (options.featured) {
+            hotelsQuery.andWhere(`featured IS ${options.featured}`);
+        }
+        if (options.limit) {
+            hotelsQuery.limit(options.limit);
+        }
+        const hotels = await hotelsQuery.getRawMany();
         return hotels;
     }
     async findHotel(id) {
@@ -94,7 +101,7 @@ let HotelsService = class HotelsService {
                     .where('type = :type', { type })
                     .getRawOne();
             }));
-            const listArr = list.map((item, i) => (Object.assign(Object.assign({}, item), { type: types[i] })));
+            const listArr = list.map((item, i) => (Object.assign(Object.assign({}, item), { type: types[i] + 's' })));
             return listArr;
         }
         catch (err) {

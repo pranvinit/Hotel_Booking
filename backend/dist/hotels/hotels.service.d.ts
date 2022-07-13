@@ -9,7 +9,7 @@ export declare class HotelsService {
     private roomNumbersRepo;
     private hotelsRepo;
     constructor(roomsRepo: Repository<Room>, roomNumbersRepo: Repository<RoomNumber>, hotelsRepo: Repository<Hotel>);
-    findAllHotels(options: GetHotelDto): Promise<any[]>;
+    findAllHotels(options: Partial<GetHotelDto>): Promise<any[]>;
     findHotel(id: number): Promise<Hotel>;
     findHotelRooms(id: number): Promise<any[]>;
     createHotel(hotelDto: CreateHotelDto): Promise<Hotel>;

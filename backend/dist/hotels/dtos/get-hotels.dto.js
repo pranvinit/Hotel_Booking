@@ -15,6 +15,10 @@ const class_transformer_1 = require("class-transformer");
 class GetHotelDto {
 }
 __decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], GetHotelDto.prototype, "city", void 0);
+__decorate([
     (0, class_transformer_1.Transform)(({ value }) => Number(value)),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
@@ -30,11 +34,8 @@ __decorate([
     __metadata("design:type", Number)
 ], GetHotelDto.prototype, "max", void 0);
 __decorate([
-    (0, class_transformer_1.Transform)(({ value }) => {
-        return value === 'true' ? true : false;
-    }),
     (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", String)
 ], GetHotelDto.prototype, "featured", void 0);
 exports.GetHotelDto = GetHotelDto;
 //# sourceMappingURL=get-hotels.dto.js.map
