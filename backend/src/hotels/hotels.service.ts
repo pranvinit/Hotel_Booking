@@ -21,8 +21,8 @@ export class HotelsService {
   ) {}
 
   async findAllHotels(options: Partial<GetHotelDto>) {
-    const min = options.min ? options.min : 1;
-    const max = options.max ? options.max : 999;
+    const min = options?.min || 1;
+    const max = options?.max || 999;
 
     const hotelsQuery = this.hotelsRepo
       .createQueryBuilder()
@@ -30,13 +30,13 @@ export class HotelsService {
       .where('cheapestPrice >= :min', { min })
       .andWhere('cheapestPrice <= :max', { max });
 
-    if (options.city) {
+    if (options?.city) {
       hotelsQuery.andWhere('city = :city', { city: options.city });
     }
-    if (options.featured) {
+    if (options?.featured) {
       hotelsQuery.andWhere(`featured IS ${options.featured}`);
     }
-    if (options.limit) {
+    if (options?.limit) {
       hotelsQuery.limit(options.limit);
     }
 
