@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Room } from './room.entity';
 
 // export interface RoomNumbers {
 //   id: number;
@@ -7,7 +8,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 // }
 
 @Entity()
-export class Room {
+export class RoomNumber {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,5 +16,8 @@ export class Room {
   number: number;
 
   @Column({ default: '[]' })
-  unavailableDates: Date[];
+  unavailableDates: string;
+
+  @ManyToOne(() => Room, (room) => room.roomNumbers)
+  room: Room;
 }

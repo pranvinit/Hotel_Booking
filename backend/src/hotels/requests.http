@@ -21,7 +21,7 @@ GET http://localhost:5000/api/v1/hotels?min=100&max=250&limit=5&featured=false
 GET http://localhost:5000/api/v1/hotels/3
 
 ### Get hotel rooms
-GET http://localhost:5000/api/v1/hotels/3/rooms
+GET http://localhost:5000/api/v1/hotels/1/rooms
 
 ### Update a hotel
 PATCH http://localhost:5000/api/v1/hotels/3
@@ -33,3 +33,9 @@ Content-Type: application/json
 
 ### Delete a hotel
 DELETE http://localhost:5000/api/v1/hotels/3
+
+### Get hotel count by city
+GET http://localhost:5000/api/v1/hotels/countByCity?cities=Pune,madrid,akurdi,pune
+
+### Get count by type
+GET http://localhost:5000/api/v1/hotels/countByType

@@ -5,6 +5,7 @@ export declare class RoomsController {
     private roomsService;
     constructor(roomsService: RoomsService);
     getSingleRoom(roomId: number): Promise<Room>;
+    updateAvailability(roomId: number, body: Date[]): Promise<import("./entities/room-number.entity").RoomNumber>;
     getAllRooms(): Promise<Room[]>;
     createRoom(hotelId: number, body: CreateRoomDto): Promise<Room>;
     updateRoom(roomId: number, body: Partial<Room>): Promise<Room>;

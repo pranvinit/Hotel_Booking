@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { RoomNumber } from 'src/rooms/entities/room-number.entity';
 import { Room } from 'src/rooms/entities/room.entity';
 import { Repository } from 'typeorm';
 import { CreateHotelDto } from './dtos/create-hotel.dto';
@@ -13,8 +14,10 @@ import { Hotel } from './entities/hotel.entity';
 @Injectable()
 export class HotelsService {
   constructor(
-    @InjectRepository(Hotel) private hotelsRepo: Repository<Hotel>,
     @InjectRepository(Room) private roomsRepo: Repository<Room>,
+    @InjectRepository(RoomNumber)
+    private roomNumbersRepo: Repository<RoomNumber>,
+    @InjectRepository(Hotel) private hotelsRepo: Repository<Hotel>,
   ) {}
 
   async findAllHotels(options: GetHotelDto) {
@@ -52,6 +55,18 @@ export class HotelsService {
         }),
       );
 
+      const RNArray = await Promise.all(
+        list.map((room) => {
+          return this.roomNumbersRepo
+            .createQueryBuilder()
+            .relation(Room, 'roomNumbers')
+            .of(room)
+            .loadMany();
+        }),
+      );
+
+      list.map((r, i) => (r.roomNumbers = RNArray[i]));
+
       return list;
     } catch (err) {
       throw new InternalServerErrorException('Something went wrong');
@@ -75,5 +90,48 @@ export class HotelsService {
     const hotel = await this.hotelsRepo.findOneBy({ id });
     if (!hotel) throw new NotFoundException('Hotel not found');
     return this.hotelsRepo.remove(hotel);
+  }
+
+  async getCountByType() {
+    const types = ['Hotel', 'Apartment', 'Resort', 'Villa', 'Cabin'];
+
+    try {
+      const list = await Promise.all(
+        types.map((type) => {
+          return this.hotelsRepo
+            .createQueryBuilder()
+            .select('COUNT(*)', 'count')
+            .where('type = :type', { type })
+            .getRawOne();
+        }),
+      );
+
+      const listArr = list.map((item, i) => ({
+        ...item,
+        type: types[i],
+      }));
+      return listArr;
+    } catch (err) {
+      throw new InternalServerErrorException('Something went wrong');
+    }
+  }
+
+  async getHotelCountByCity(cities: string) {
+    const cityArray = cities.split(',');
+    try {
+      const list = await Promise.all(
+        cityArray.map((city) => {
+          return this.hotelsRepo
+            .createQueryBuilder()
+            .select('COUNT(*)', 'count')
+            .where('city = :city', { city })
+            .getRawOne();
+        }),
+      );
+      const listArr = list.map((i) => i.count);
+      return listArr;
+    } catch (err) {
+      throw new InternalServerErrorException('Something went wrong');
+    }
   }
 }

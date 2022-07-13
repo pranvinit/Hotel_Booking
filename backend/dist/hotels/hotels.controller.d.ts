@@ -6,6 +6,8 @@ export declare class HotelsController {
     private hotelsService;
     constructor(hotelsService: HotelsService);
     getAllHotels(options: GetHotelDto): Promise<any[]>;
+    countByCity(cities: string): Promise<any[]>;
+    countByType(): Promise<any[]>;
     getHotel(hotelId: number): Promise<Hotel>;
     getHotelRooms(hotelId: number): Promise<any[]>;
     createHotel(body: CreateHotelDto): Promise<Hotel>;

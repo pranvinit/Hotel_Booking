@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoomsController = void 0;
 const common_1 = require("@nestjs/common");
+const admin_guard_1 = require("../guards/admin.guard");
 const create_room_dto_1 = require("./dtos/create-room.dto");
 const rooms_service_1 = require("./rooms.service");
 let RoomsController = class RoomsController {
@@ -22,6 +23,9 @@ let RoomsController = class RoomsController {
     }
     getSingleRoom(roomId) {
         return this.roomsService.findRoom(roomId);
+    }
+    updateAvailability(roomId, body) {
+        return this.roomsService.updateAvailability(roomId, body);
     }
     getAllRooms() {
         return this.roomsService.findAllRooms();
@@ -44,13 +48,23 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], RoomsController.prototype, "getSingleRoom", null);
 __decorate([
+    (0, common_1.Patch)('/:id/availability'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('dates')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Array]),
+    __metadata("design:returntype", void 0)
+], RoomsController.prototype, "updateAvailability", null);
+__decorate([
     (0, common_1.Get)(),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], RoomsController.prototype, "getAllRooms", null);
 __decorate([
     (0, common_1.Post)('/:id'),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -59,6 +73,7 @@ __decorate([
 ], RoomsController.prototype, "createRoom", null);
 __decorate([
     (0, common_1.Patch)('/:id'),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -67,6 +82,7 @@ __decorate([
 ], RoomsController.prototype, "updateRoom", null);
 __decorate([
     (0, common_1.Delete)('/:id/:hotelId'),
+    (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Param)('hotelId')),
     __metadata("design:type", Function),

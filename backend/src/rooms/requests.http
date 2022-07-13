@@ -1,12 +1,21 @@
 ### Create a room
-POST http://localhost:5000/api/v1/rooms/3
+POST http://localhost:5000/api/v1/rooms/1
 Content-Type: application/json
 
 {
     "title": "room two",
     "price": 120,
     "maxPeople": 2,
-    "desc": "Decent room"
+    "desc": "Decent room",
+    "roomNumbers": [{"number":103,"unavailableDates":["15-07-2022"]},{"number":104,"unavailableDates":["18-07-2022","22-07-2022"]}]
+}
+
+### Update room availability
+PATCH http://localhost:5000/api/v1/rooms/2/availability
+Content-Type: application/json
+
+{
+    "dates": ["13-05-2022", "15-05-2022"]
 }
 
 ### Update room
@@ -14,14 +23,14 @@ PATCH http://localhost:5000/api/v1/rooms/1
 Content-Type: application/json
 
 {
-    "roomNumbers": "[{number: 103, id: 1, unavailableDates: []}, {number: 104, id: 2,unavailableDates: []}]"
+    "title": "Updated room title"
 }
 
 ### Get single room
-GET http://localhost:5000/api/v1/rooms/4
+GET http://localhost:5000/api/v1/rooms/1
 
 ### Get all rooms
 GET http://localhost:5000/api/v1/rooms
 
 ### Delete Room
-DELETE  http://localhost:5000/api/v1/rooms/2/3
+DELETE  http://localhost:5000/api/v1/rooms/3/5

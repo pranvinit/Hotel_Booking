@@ -10,13 +10,14 @@ import { User } from './users/entities/user.entity';
 import { CurrentUserMiddleware } from './middlewares/authenticate-user.middleware';
 import { Room } from './rooms/entities/room.entity';
 import { Hotel } from './hotels/entities/hotel.entity';
+import { RoomNumber } from './rooms/entities/room-number.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'booking.sqlite',
-      entities: [User, Room, Hotel],
+      entities: [User, Room, RoomNumber, Hotel],
       // cleans and syncs database on changes
       synchronize: true,
     }),

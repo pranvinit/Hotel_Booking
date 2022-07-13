@@ -9,11 +9,11 @@ GET http://localhost:5000/api/v1/users/currentUser
 
 
 ### Update user
-PATCH http://localhost:5000/api/v1/users/2
+PATCH http://localhost:5000/api/v1/users/1
 Content-Type: application/json
 
 {
-    "username": "johnsecretly"
+    "isAdmin": true
 }
 
 ### Delete user

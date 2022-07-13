@@ -3,10 +3,10 @@ POST http://localhost:5000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "username": "jane", 
-    "email": "jane@gmail.com",
-    "country": "Ukraine",
-    "city": "Kyiv",
+    "username": "john", 
+    "email": "john@gmail.com",
+    "country": "Russia",
+    "city": "Moscow",
     "phone": "5465455454",
     "password": "secret",
     "isAdmin": false

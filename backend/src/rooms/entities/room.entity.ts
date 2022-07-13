@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { RoomNumber } from './room-number.entity';
 
 // export interface RoomNumbers {
 //   id: number;
@@ -29,11 +31,10 @@ export class Room {
   @Column()
   desc: string;
 
-  @Column({
-    nullable: true,
-    default: '[{number: undefined, id: undefined, unavailableDates: []}]',
+  @OneToMany(() => RoomNumber, (roomNumber) => roomNumber.room, {
+    cascade: true,
   })
-  roomNumbers: string;
+  roomNumbers: RoomNumber[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,5 +1,7 @@
-export declare class Room {
+import { Room } from './room.entity';
+export declare class RoomNumber {
     id: number;
     number: number;
-    unavailableDates: Date[];
+    unavailableDates: string;
+    room: Room;
 }

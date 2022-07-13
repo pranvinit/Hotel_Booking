@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber, IsArray } from 'class-validator';
 // import { RoomNumbers } from '../entities/room.entity';
 
 export class CreateRoomDto {
@@ -14,5 +14,6 @@ export class CreateRoomDto {
   @IsString()
   desc: string;
 
-  roomNumbers: string;
+  @IsArray()
+  roomNumbers: object[];
 }

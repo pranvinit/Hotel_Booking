@@ -9,24 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Room = void 0;
+exports.RoomNumber = void 0;
 const typeorm_1 = require("typeorm");
-let Room = class Room {
+const room_entity_1 = require("./room.entity");
+let RoomNumber = class RoomNumber {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Room.prototype, "id", void 0);
+], RoomNumber.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Room.prototype, "number", void 0);
+], RoomNumber.prototype, "number", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: '[]' }),
-    __metadata("design:type", Array)
-], Room.prototype, "unavailableDates", void 0);
-Room = __decorate([
+    __metadata("design:type", String)
+], RoomNumber.prototype, "unavailableDates", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => room_entity_1.Room, (room) => room.roomNumbers),
+    __metadata("design:type", room_entity_1.Room)
+], RoomNumber.prototype, "room", void 0);
+RoomNumber = __decorate([
     (0, typeorm_1.Entity)()
-], Room);
-exports.Room = Room;
+], RoomNumber);
+exports.RoomNumber = RoomNumber;
 //# sourceMappingURL=room-number.entity.js.map
