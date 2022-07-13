@@ -26,20 +26,20 @@ let HotelsService = class HotelsService {
         this.hotelsRepo = hotelsRepo;
     }
     async findAllHotels(options) {
-        const min = options.min ? options.min : 1;
-        const max = options.max ? options.max : 999;
+        const min = (options === null || options === void 0 ? void 0 : options.min) || 1;
+        const max = (options === null || options === void 0 ? void 0 : options.max) || 999;
         const hotelsQuery = this.hotelsRepo
             .createQueryBuilder()
             .select('*')
             .where('cheapestPrice >= :min', { min })
             .andWhere('cheapestPrice <= :max', { max });
-        if (options.city) {
+        if (options === null || options === void 0 ? void 0 : options.city) {
             hotelsQuery.andWhere('city = :city', { city: options.city });
         }
-        if (options.featured) {
+        if (options === null || options === void 0 ? void 0 : options.featured) {
             hotelsQuery.andWhere(`featured IS ${options.featured}`);
         }
-        if (options.limit) {
+        if (options === null || options === void 0 ? void 0 : options.limit) {
             hotelsQuery.limit(options.limit);
         }
         const hotels = await hotelsQuery.getRawMany();

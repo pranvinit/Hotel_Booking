@@ -1,0 +1,56 @@
+@import "../../partials/variables";
+
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  & > .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.75;
+  }
+
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 20px;
+    padding: 30px;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+
+    & > input {
+      border: 2px solid $black;
+      outline: none;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 300;
+      border-radius: 5px;
+    }
+
+    & > input:focus {
+      border-color: $light-blue;
+    }
+    & > button {
+      border: none;
+      padding: 5px 10px;
+      background-color: $light-blue;
+      color: $white;
+      font-weight: 500;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    & > span {
+      font-size: 12px;
+      font-weight: 500;
+      color: $red;
+    }
+  }
+}

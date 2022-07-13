@@ -2,6 +2,7 @@ import { TokenUserDto } from 'src/users/dtos/token-user.dto';
 
 const jwt = require('jsonwebtoken');
 const createTokenUser = (user) => ({
+  username: user.username,
   userId: user.id,
   isAdmin: user.isAdmin,
 });

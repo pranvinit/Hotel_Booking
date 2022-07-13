@@ -1,0 +1,94 @@
+@import "../../partials/variables";
+
+.reserve {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .rContainer {
+    background-color: $white;
+    padding: 20px;
+    position: relative;
+
+    & > span {
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .rClose {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .rItem {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      padding: 20px;
+
+      .rItemInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .title {
+          font-weight: 500;
+          font-size: 24px;
+        }
+        .desc {
+          font-weight: 300;
+        }
+        .rMax {
+          font-size: 14px;
+        }
+        .rPrice {
+          font-weight: bold;
+        }
+      }
+    }
+    & > button {
+      border: none;
+      width: 100%;
+      padding: 10px;
+      background-color: $light-blue;
+      color: $white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    & > button:hover {
+      background-color: #0d5c95;
+    }
+
+    .rSelectRoom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 14px;
+      color: $dark-gray;
+
+      .room {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        & > input {
+          cursor: pointer;
+        }
+        & > input:disabled {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

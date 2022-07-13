@@ -2,6 +2,9 @@ import "./search.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from "react";
+import { SearchContext } from "../../context/SearchContext";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faPerson } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,7 +13,12 @@ import { DateRangePicker } from "rsuite";
 const { beforeToday } = DateRangePicker;
 
 export default function Search() {
-  const [date, setDate] = useState([new Date(), new Date()]);
+  const { dispatch } = useContext(SearchContext);
+
+  const [dates, setDates] = useState([
+    new Date(),
+    new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+  ]);
 
   const [destination, setDestination] = useState("");
 
@@ -31,7 +39,8 @@ export default function Search() {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    navigate("/hotels", { state: { destination, date, options } });
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    navigate("/hotels", { state: { destination, dates, options } });
   };
 
   return (
@@ -49,8 +58,8 @@ export default function Search() {
       <div className="item">
         <DateRangePicker
           className="date"
-          value={date}
-          onChange={setDate}
+          value={dates}
+          onChange={setDates}
           character=" to "
           format="MM-dd-yyyy"
           disabledDate={beforeToday(false)}

@@ -24,6 +24,13 @@
     .items {
       display: flex;
       gap: 20px;
+      align-items: center;
+
+      & > span {
+        text-transform: capitalize;
+        font-size: 16px;
+        font-weight: 500;
+      }
 
       button {
         border: none;

@@ -9,7 +9,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Search from "../search/Search";
 
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+
 export default function Header({ type }) {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="header">
       <div className={type !== "list" ? "container" : "container listMode"}>
@@ -41,7 +47,11 @@ export default function Header({ type }) {
             <p className="desc">
               Search low prices on hotels, homes and much more...
             </p>
-            <button className="headerBtn">Sign in / Register</button>
+            {!user && (
+              <Link to="/login">
+                <button className="headerBtn">Sign in / Register</button>
+              </Link>
+            )}
             <Search />
           </>
         )}
