@@ -40,4 +40,8 @@
     padding-inline: 10px;
     cursor: pointer;
   }
+  .mailInputContainer > button:disabled {
+    background-color: rgb(170, 170, 170);
+    cursor: not-allowed;
+  }
 }

@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { fstat } from 'fs';
 import { RoomNumber } from 'src/rooms/entities/room-number.entity';
 import { Room } from 'src/rooms/entities/room.entity';
 import { Repository } from 'typeorm';
