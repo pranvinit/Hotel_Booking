@@ -4,12 +4,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { fstat } from 'fs';
 import { RoomNumber } from 'src/rooms/entities/room-number.entity';
 import { Room } from 'src/rooms/entities/room.entity';
 import { Repository } from 'typeorm';
 import { CreateHotelDto } from './dtos/create-hotel.dto';
 import { GetHotelDto } from './dtos/get-hotels.dto';
 import { Hotel } from './entities/hotel.entity';
+const path = require('path');
+const cloudinary = require('cloudinary');
+const fs = require('fs/promises');
 
 @Injectable()
 export class HotelsService {
@@ -138,6 +142,37 @@ export class HotelsService {
       );
       const listArr = list.map((i) => i.count);
       return listArr;
+    } catch (err) {
+      throw new InternalServerErrorException('Something went wrong');
+    }
+  }
+
+  async upload(files: Array<Express.Multer.File>) {
+    const imgPaths = files.map((image) => {
+      return path.join(
+        __dirname,
+        '../uploads',
+        `${image.originalname.replace(' ', '_')}`,
+      );
+    });
+
+    try {
+      const result = await Promise.all(
+        imgPaths.map((image) => {
+          return cloudinary.uploader.upload(image, {
+            use_filename: true,
+          });
+        }),
+      );
+
+      await Promise.all(
+        imgPaths.map((path) => {
+          return fs.unlink(path);
+        }),
+      );
+
+      const pathArr = result.map((item) => item.secure_url);
+      return pathArr;
     } catch (err) {
       throw new InternalServerErrorException('Something went wrong');
     }

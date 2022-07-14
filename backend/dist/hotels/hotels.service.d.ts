@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 import { RoomNumber } from 'src/rooms/entities/room-number.entity';
 import { Room } from 'src/rooms/entities/room.entity';
 import { Repository } from 'typeorm';
@@ -17,4 +18,5 @@ export declare class HotelsService {
     deleteHotel(id: number): Promise<Hotel>;
     getCountByType(): Promise<any[]>;
     getHotelCountByCity(cities: string): Promise<any[]>;
+    upload(files: Array<Express.Multer.File>): Promise<any[]>;
 }

@@ -1,5 +1,6 @@
 import "./featured.scss";
 import useFetch from "../../hooks/useFetch";
+import { Loader } from "rsuite";
 
 export default function Featured() {
   const { data, loading, error, reFetch } = useFetch(
@@ -9,7 +10,9 @@ export default function Featured() {
   return (
     <div className="featured">
       {loading ? (
-        "Loading please wait"
+        <div className="loading">
+          <Loader size="md" content="Loading..." />
+        </div>
       ) : (
         <>
           <div className="featuredItem">

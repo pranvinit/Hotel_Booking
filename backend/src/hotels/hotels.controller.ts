@@ -7,13 +7,17 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AdminGuard } from 'src/guards/admin.guard';
 import { CreateHotelDto } from './dtos/create-hotel.dto';
 import { GetHotelDto } from './dtos/get-hotels.dto';
 import { Hotel } from './entities/hotel.entity';
 import { HotelsService } from './hotels.service';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { multerOptions } from './validators/file.validator';
 
 @Controller('hotels')
 export class HotelsController {
@@ -42,6 +46,12 @@ export class HotelsController {
   @Get('/:id/rooms')
   getHotelRooms(@Param('id') hotelId: number) {
     return this.hotelsService.findHotelRooms(hotelId);
+  }
+
+  @Post('/uploadMedia')
+  @UseInterceptors(FilesInterceptor('images', 6, multerOptions))
+  uploadMedia(@UploadedFiles() files: Array<Express.Multer.File>) {
+    return this.hotelsService.upload(files);
   }
 
   @Post()

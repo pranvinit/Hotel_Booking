@@ -9,26 +9,21 @@ import SearchItem from "../../components/searchItem/SearchItem";
 import { useLocation } from "react-router-dom";
 
 import "rsuite/dist/rsuite.min.css";
-import { DateRangePicker } from "rsuite";
+import { DateRangePicker, Loader } from "rsuite";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { useEffect } from "react";
 
 const { beforeToday } = DateRangePicker;
 
-const INITIAL_STATE = {
-  destination: "",
-  dates: [new Date(), new Date(new Date().getTime() + 24 * 60 * 60 * 1000)],
-  options: {},
-};
-
 export default function List() {
   let { state } = useLocation();
+  const scState = useContext(SearchContext);
 
-  state = state || INITIAL_STATE;
+  state = state || scState;
 
-  const [destination, setDestination] = useState(state?.destination);
-  const [dates, setDates] = useState(state?.dates);
+  const [destination, setDestination] = useState(state.destination || "");
+  const [dates, setDates] = useState(state.dates);
   const [options, setOptions] = useState(state.options);
 
   const [min, setMin] = useState(null);
@@ -142,7 +137,9 @@ export default function List() {
           </div>
           <div className="listResult">
             {loading ? (
-              "Loading please wait"
+              <div className="loading">
+                <Loader size="lg" content="Loading..." vertical />
+              </div>
             ) : (
               <>
                 {data.map((item) => (

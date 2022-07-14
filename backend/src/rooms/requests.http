@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Update room availability
-PATCH http://localhost:5000/api/v1/rooms/2/availability
+PATCH http://localhost:5000/api/v1/rooms/4/availability
 Content-Type: application/json
 
 {

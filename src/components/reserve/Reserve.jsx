@@ -4,6 +4,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "rsuite";
 import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import "./reserve.scss";
@@ -15,13 +16,15 @@ export default function Reserve({ setOpen, hotelId }) {
 
   const { dates } = useContext(SearchContext);
   const getDatesInRange = (startDate, endDate) => {
-    const date = new Date(startDate.getTime());
+    const start = new Date(startDate.setHours(0, 0, 0, 0));
+    const end = new Date(endDate.setHours(0, 0, 0, 0));
+
+    const date = new Date(start.getTime());
     const list = [];
-    while (date <= endDate) {
+    while (date <= end) {
       list.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
-
     return list;
   };
 
@@ -67,7 +70,9 @@ export default function Reserve({ setOpen, hotelId }) {
   return (
     <div className="reserve">
       {loading ? (
-        "Loading please wait"
+        <div className="loading">
+          <Loader size="md" content="Loading..." />
+        </div>
       ) : (
         <div className="rContainer">
           <FontAwesomeIcon
@@ -75,6 +80,7 @@ export default function Reserve({ setOpen, hotelId }) {
             className="rClose"
             onClick={() => setOpen(false)}
           />
+
           <span>Select your rooms:</span>
           {data.map((item) => (
             <div key={item.id} className="rItem">

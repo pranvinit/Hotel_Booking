@@ -5,6 +5,7 @@ import * as cookieParser from 'cookie-parser';
 
 const cors = require('cors');
 require('dotenv').config();
+const cloudinary = require('cloudinary').v2;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,13 @@ async function bootstrap() {
   app.use(cors());
   app.setGlobalPrefix('api/v1');
   app.use(cookieParser(process.env.SIGNED_COOKIE_SECRET));
+
+  // file upload config
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
+  });
 
   await app.listen(port);
 }

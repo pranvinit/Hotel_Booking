@@ -14,20 +14,14 @@ const { beforeToday } = DateRangePicker;
 
 export default function Search() {
   const { dispatch } = useContext(SearchContext);
+  const scState = useContext(SearchContext);
 
-  const [dates, setDates] = useState([
-    new Date(),
-    new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-  ]);
+  const [dates, setDates] = useState(scState.dates);
 
-  const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState(scState.destination);
 
   const [showOptions, setShowOptions] = useState(false);
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
+  const [options, setOptions] = useState(scState.options);
 
   const handleOptions = (name, operation) => {
     setOptions((prev) => ({

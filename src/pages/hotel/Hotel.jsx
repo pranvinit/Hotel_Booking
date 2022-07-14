@@ -22,6 +22,7 @@ import { PHOTOS } from "../../mockData";
 import useFetch from "../../hooks/useFetch";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import { Loader } from "rsuite";
 
 const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -100,11 +101,15 @@ export default function Hotel() {
         </div>
       )}
       {loading ? (
-        "Loading please wait"
+        <div className="hotelLoading">
+          <Loader size="lg" content="Loading..." vertical />
+        </div>
       ) : (
         <div className="hotelContainer">
           <div className="hotelWrapper">
-            <button className="bookNowBtn">Reserve or Book Now!</button>
+            <button onClick={handleReserve} className="bookNowBtn">
+              Reserve or Book Now!
+            </button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />

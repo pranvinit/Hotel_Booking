@@ -1,0 +1,45 @@
+.notfound {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .notfoundBox {
+    height: 400px;
+    width: 40%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    .notfoundImg {
+      width: 150px;
+    }
+
+    .notfoundTextTitle {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .notfoundText {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .nofoundHomeButton {
+      border: none;
+      outline: none;
+      width: 250px;
+      padding: 10px;
+      border-radius: 10px;
+      color: #fff;
+      background-color: #1775ee;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+}

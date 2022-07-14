@@ -19,6 +19,9 @@ const room_number_entity_1 = require("../rooms/entities/room-number.entity");
 const room_entity_1 = require("../rooms/entities/room.entity");
 const typeorm_2 = require("typeorm");
 const hotel_entity_1 = require("./entities/hotel.entity");
+const path = require('path');
+const cloudinary = require('cloudinary');
+const fs = require('fs/promises');
 let HotelsService = class HotelsService {
     constructor(roomsRepo, roomNumbersRepo, hotelsRepo) {
         this.roomsRepo = roomsRepo;
@@ -120,6 +123,26 @@ let HotelsService = class HotelsService {
             }));
             const listArr = list.map((i) => i.count);
             return listArr;
+        }
+        catch (err) {
+            throw new common_1.InternalServerErrorException('Something went wrong');
+        }
+    }
+    async upload(files) {
+        const imgPaths = files.map((image) => {
+            return path.join(__dirname, '../uploads', `${image.originalname.replace(' ', '_')}`);
+        });
+        try {
+            const result = await Promise.all(imgPaths.map((image) => {
+                return cloudinary.uploader.upload(image, {
+                    use_filename: true,
+                });
+            }));
+            await Promise.all(imgPaths.map((path) => {
+                return fs.unlink(path);
+            }));
+            const pathArr = result.map((item) => item.secure_url);
+            return pathArr;
         }
         catch (err) {
             throw new common_1.InternalServerErrorException('Something went wrong');

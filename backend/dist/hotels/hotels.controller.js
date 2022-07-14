@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const admin_guard_1 = require("../guards/admin.guard");
 const create_hotel_dto_1 = require("./dtos/create-hotel.dto");
 const hotels_service_1 = require("./hotels.service");
+const platform_express_1 = require("@nestjs/platform-express");
+const file_validator_1 = require("./validators/file.validator");
 let HotelsController = class HotelsController {
     constructor(hotelsService) {
         this.hotelsService = hotelsService;
@@ -35,6 +37,9 @@ let HotelsController = class HotelsController {
     }
     getHotelRooms(hotelId) {
         return this.hotelsService.findHotelRooms(hotelId);
+    }
+    uploadMedia(files) {
+        return this.hotelsService.upload(files);
     }
     createHotel(body) {
         return this.hotelsService.createHotel(body);
@@ -80,6 +85,14 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], HotelsController.prototype, "getHotelRooms", null);
+__decorate([
+    (0, common_1.Post)('/uploadMedia'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('images', 6, file_validator_1.multerOptions)),
+    __param(0, (0, common_1.UploadedFiles)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], HotelsController.prototype, "uploadMedia", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
