@@ -13,7 +13,7 @@ packages/**/*.js
 *.sqlite
 
 # compiled files
-/dist
+dist/
 
 # misc
 .DS_Store
