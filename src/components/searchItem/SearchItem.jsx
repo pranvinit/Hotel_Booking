@@ -5,13 +5,23 @@ export default function SearchItem({ item }) {
   return (
     <div className="searchItem">
       <div className="siImg">
-        <img src="/assets/images/1.jpg" alt="" />
+        <img
+          src={
+            (item.photos && item.photos.split(",")[item.id % 6]) ||
+            "/assets/images/room-default.jpg"
+          }
+          alt=""
+        />
       </div>
       <div className="siDesc">
-        <h2 className="siTitle">{item.name}</h2>
+        <Link className="hotelLink" to={`/hotels/${item.id}`}>
+          <h2 className="siTitle">{item.name}</h2>
+        </Link>
         <span className="siDistance">{item.distance}m from center</span>
         <span className="siTaxiOp">Free airport taxi</span>
-        <span className="siSubtitle">{item.desc}</span>
+        <span className="siSubtitle">
+          {item.desc.length > 200 ? item.desc.slice(0, 100) + "..." : item.desc}
+        </span>
         <span className="siFeatures">
           Entire studio • 1 bathroomm • 21m² • 1 full bed
         </span>

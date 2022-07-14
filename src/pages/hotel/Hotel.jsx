@@ -17,12 +17,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
-
-import { PHOTOS } from "../../mockData";
 import useFetch from "../../hooks/useFetch";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
 import { Loader } from "rsuite";
+
+import { ROOM_DEFAULT } from "../../mockData.js";
+import { useEffect } from "react";
 
 const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -31,10 +32,19 @@ export default function Hotel() {
   const { pathname } = useLocation();
   const hotelId = pathname.split("/")[2];
 
+  // scroll to top on load
+  useEffect(() => window.scrollTo(0, 0), []);
+
+  let PHOTOS = Array(6).fill(ROOM_DEFAULT);
   const { user } = useContext(AuthContext);
   const [openModal, setOpenModal] = useState(false);
 
   const { data, loading, error, reFetch } = useFetch(`/hotels/${hotelId}`);
+
+  if (data.photos && data.photos.split(",").length) {
+    PHOTOS = data.photos.split(",");
+  }
+
   const { dates, options } = useContext(SearchContext);
 
   const dayDifference = (dateOne, dateTwo) => {
@@ -90,7 +100,7 @@ export default function Hotel() {
             onClick={() => handleMove("l")}
           />
           <div className="sliderWrapper">
-            <img src={PHOTOS[slideNumber].src} alt="" />
+            <img src={PHOTOS[slideNumber]} alt="" />
           </div>
 
           <FontAwesomeIcon
@@ -127,7 +137,7 @@ export default function Hotel() {
                 <div key={i} className="hotelImgWrapper">
                   <img
                     onClick={() => handleSlider(i)}
-                    src={photo.src}
+                    src={photo}
                     alt=""
                     className="hotelImg"
                   />

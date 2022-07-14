@@ -28,7 +28,14 @@ PATCH http://localhost:5000/api/v1/hotels/7
 Content-Type: application/json
 
 {
-    "featured": true
+    "photos": [
+    "https://res.cloudinary.com/dl26pbek4/image/upload/v1657803595/od25khrxynna5qink6gu.jpg",
+    "https://res.cloudinary.com/dl26pbek4/image/upload/v1657803594/hqiwzkihcl1oemrmnvnk.jpg",
+    "https://res.cloudinary.com/dl26pbek4/image/upload/v1657803594/g0lbifq8mckd7ehs2mpb.jpg",
+    "https://res.cloudinary.com/dl26pbek4/image/upload/v1657803593/twbkbhbn66xcbh73bpwl.jpg",
+    "https://res.cloudinary.com/dl26pbek4/image/upload/v1657803592/pk0shcrqoyhry98e8e1q.jpg",
+    "https://res.cloudinary.com/dl26pbek4/image/upload/v1657803594/ijt3li2iotteof07qcat.jpg"
+]
 }
 
 ### Delete a hotel

@@ -16,21 +16,21 @@ export default function Featured() {
       ) : (
         <>
           <div className="featuredItem">
-            <img src="/assets/images/1.jpg" alt="" />
+            <img src="/assets/images/mumbai.jpg" alt="" />
             <div className="featuredTitle">
               <span>Mumbai</span>
               <span>{data[0]} properties</span>
             </div>
           </div>
           <div className="featuredItem">
-            <img src="/assets/images/2.jpg" alt="" />
+            <img src="/assets/images/pune.jpg" alt="" />
             <div className="featuredTitle">
               <span>Pune</span>
               <span>{data[1]} properties</span>
             </div>
           </div>
           <div className="featuredItem">
-            <img src="/assets/images/3.jpg" alt="" />
+            <img src="/assets/images/bangalore.jpg" alt="" />
             <div className="featuredTitle">
               <span>Bangalore</span>
               <span>{data[2]} properties</span>

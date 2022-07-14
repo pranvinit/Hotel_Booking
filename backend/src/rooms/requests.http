@@ -1,13 +1,13 @@
 ### Create a room
-POST http://localhost:5000/api/v1/rooms/1
+POST http://localhost:5000/api/v1/rooms/3
 Content-Type: application/json
 
 {
-    "title": "room two",
-    "price": 120,
-    "maxPeople": 2,
-    "desc": "Decent room",
-    "roomNumbers": [{"number":103,"unavailableDates":["15-07-2022"]},{"number":104,"unavailableDates":["18-07-2022","22-07-2022"]}]
+    "title": "Deluxe Room",
+    "price": 200,
+    "maxPeople": 4,
+    "desc": "Full size bed, 2 bathroom, 1 balcony",
+    "roomNumbers": [{"number":105,"unavailableDates":[]},{"number":107,"unavailableDates":[]}]
 }
 
 ### Update room availability
@@ -19,11 +19,11 @@ Content-Type: application/json
 }
 
 ### Update room
-PATCH http://localhost:5000/api/v1/rooms/2
+PATCH http://localhost:5000/api/v1/rooms/1
 Content-Type: application/json
 
 {
-    "desc": "King size bed, 1 bathroom, balcony"
+    "title": "Premium Room"
 }
 
 ### Get single room
