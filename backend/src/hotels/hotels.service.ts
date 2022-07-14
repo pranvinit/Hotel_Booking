@@ -34,7 +34,7 @@ export class HotelsService {
       .andWhere('cheapestPrice <= :max', { max });
 
     if (options?.city) {
-      hotelsQuery.andWhere('city = :city', { city: options.city });
+      hotelsQuery.andWhere('city like :city', { city: `%${options.city}%` });
     }
     if (options?.featured) {
       hotelsQuery.andWhere(`featured IS ${options.featured}`);

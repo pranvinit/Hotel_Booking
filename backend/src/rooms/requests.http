@@ -19,11 +19,11 @@ Content-Type: application/json
 }
 
 ### Update room
-PATCH http://localhost:5000/api/v1/rooms/1
+PATCH http://localhost:5000/api/v1/rooms/2
 Content-Type: application/json
 
 {
-    "title": "Premium Room"
+    "price": 70
 }
 
 ### Get single room
